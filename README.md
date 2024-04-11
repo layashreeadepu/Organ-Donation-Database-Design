@@ -49,6 +49,8 @@ The Organ Donation System is a comprehensive solution designed to address key bu
   
 - **Transplantation:** The overall process of transferring organs from donors to recipients, involving medical procedures, logistics, and coordination.
 
+<img  height="300" src="![Organ Donation ER update (1)](https://github.com/layashreeadepu/DMDD-Project-Organ-Donation/assets/62901388/78faaf68-18d0-4e14-9ea4-a0e8bfc5a976)"
+  />
 ## Conclusion
 
 The Organ Donation System aims to streamline the organ transplantation process, ensuring efficiency, transparency, and timely communication among all stakeholders. By addressing key business problems and establishing clear relationships between entities involved, it seeks to optimize the allocation of organs, improve patient outcomes, and ultimately save lives.
