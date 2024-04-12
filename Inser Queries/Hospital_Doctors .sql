@@ -1,6 +1,3 @@
-
-insert into Hospital_Doctors  (Hospital_ID , Doctor_ID , Schedule ) values (2, 1, 'Friday 7am-3pm');
-insert into Hospital_Doctors  (Hospital_ID , Doctor_ID , Schedule ) values (9, 2, 'Wednesday 8am-4pm');
 insert into Hospital_Doctors  (Hospital_ID , Doctor_ID , Schedule ) values (16, 3, 'Thursday 11am-7pm');
 insert into Hospital_Doctors  (Hospital_ID , Doctor_ID , Schedule ) values (13, 4, 'Wednesday 8am-4pm');
 insert into Hospital_Doctors  (Hospital_ID , Doctor_ID , Schedule ) values (3, 5, 'Tuesday 10am-6pm');
