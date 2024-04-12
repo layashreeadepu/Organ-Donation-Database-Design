@@ -47,7 +47,6 @@ insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (68, '10/18/2
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (70, '6/19/2020', 'Heart');
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (74, '6/1/2025', 'Eyes');
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (72, '3/14/2023', 'Heart');
-insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (77, '1/15/2024', 'Vascularized allograft (VCA)');
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (78, '12/23/2023', 'Lung');
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (79, '11/9/2026', 'Heart');
 insert into Donor (Donor_ID, Donation_Date , Organ_Donated) values (83, '11/29/2023', 'Liver');
