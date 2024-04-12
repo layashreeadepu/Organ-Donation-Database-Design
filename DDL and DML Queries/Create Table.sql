@@ -78,7 +78,7 @@ CREATE TABLE Recipient (
             'Kidney',
             'Lung',
             'Pancreas',
-            'VCA inside circle'
+            'Eyes'
         )
     ),
     Date_Registered DATE,
