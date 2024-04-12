@@ -35,5 +35,4 @@ insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_
 insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_No) values (96, 'Heart', '6/27/2021', 34);
 insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_No) values (95, 'Kidney', '10/14/2023', 35);
 insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_No) values (97, 'Intestine', '1/23/2022', 36);
-insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_No) values (56, 'Pancreas', '2/25/2021', 37);
 insert into Recipient (Recipient_ID, Required_Organ, Date_Registered, Wait_List_No) values (85, 'Heart', '5/31/2023', 38);
