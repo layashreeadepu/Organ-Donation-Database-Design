@@ -153,7 +153,7 @@ Surgery_name VARCHAR(255) CHECK (Surgery_name IN (
         'Transplant Surgery',  
         'Eye Surgery'  
         )) NOT NULL 
-CONSTRAINT PK_HospDocID PRIMARY KEY (Doctor_Name, Doctor_ID),
+CONSTRAINT PK_HospDocID PRIMARY KEY (Doctor_ID),
 );   
  
 -- Hospital Doctors   
@@ -162,7 +162,7 @@ CREATE TABLE Hospital_Doctors
 Hospital_ID INT,  
 Doctor_ID INT,  
 Schedule VARCHAR(255),  
-CONSTRAINT PK_HospDocID PRIMARY KEY (Hospital_ID, Doctor_ID),  
+CONSTRAINT PK_HospDocID1 PRIMARY KEY (Hospital_ID, Doctor_ID),  
 CONSTRAINT FK_Hospital_ID FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID),  
 CONSTRAINT FK_Doctor_ID FOREIGN KEY (Doctor_ID) REFERENCES Doctors(Doctor_ID)  
 ); 
