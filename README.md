@@ -50,8 +50,7 @@ The Organ Donation System is a comprehensive solution designed to address key bu
 - **Transplantation:** The overall process of transferring organs from donors to recipients, involving medical procedures, logistics, and coordination.
 
 <div align="center">
-  <img src="![Organ Donation ER diagram](https://github.com/layashreeadepu/DMDD-Project-Organ-Donation/assets/62901388/18288fd6-fac6-455d-9605-eb3721d030bb)" height="30"/>
-  <img width="12" />
+  [Organ Donation ER diagram](https://github.com/layashreeadepu/DMDD-Project-Organ-Donation/assets/62901388/18288fd6-fac6-455d-9605-eb3721d030bb)
 </div>
 
 ## Conclusion
