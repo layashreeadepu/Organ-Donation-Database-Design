@@ -153,7 +153,7 @@ Surgery_name VARCHAR(255) CHECK (Surgery_name IN (
         'Transplant Surgery',  
         'Eye Surgery'  
         )) NOT NULL 
-CONSTRAINT PK_HospDocID PRIMARY KEY (Doctor_Name, Doctor_ID),
+CONSTRAINT PK_HospDocID PRIMARY KEY (Doctor_ID),
 );   
  
 -- Hospital Doctors   
@@ -162,7 +162,7 @@ CREATE TABLE Hospital_Doctors
 Hospital_ID INT,  
 Doctor_ID INT,  
 Schedule VARCHAR(255),  
-CONSTRAINT PK_HospDocID PRIMARY KEY (Hospital_ID, Doctor_ID),  
+CONSTRAINT PK_HospDocID1 PRIMARY KEY (Hospital_ID, Doctor_ID),  
 CONSTRAINT FK_Hospital_ID FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID),  
 CONSTRAINT FK_Doctor_ID FOREIGN KEY (Doctor_ID) REFERENCES Doctors(Doctor_ID)  
 ); 
@@ -180,7 +180,7 @@ CREATE TABLE Donated_Organ (
 
 CREATE TABLE Transplantation (
     Transplantation_ID INT IDENTITY(1,1) PRIMARY KEY,
-    Person_ID INT,
+    Recipient_ID INT,
     Hospital_ID INT,
     Donated_Organ_ID INT,
     Doctor_ID INT,
@@ -192,8 +192,8 @@ CREATE TABLE Transplantation (
         'Reschedule'
     )) NOT NULL,
     Transplantation_Date DATE,
-    CONSTRAINT UK_Transplantation UNIQUE (Person_ID, Hospital_ID, Doctor_ID, Donated_Organ_ID),
-    CONSTRAINT FK_Person_ID_5 FOREIGN KEY (Person_ID) REFERENCES Person(Person_ID),
+    CONSTRAINT UK_Transplantation UNIQUE (Recipient_ID, Hospital_ID, Doctor_ID, Donated_Organ_ID),
+    CONSTRAINT FK_Recipient_ID_5 FOREIGN KEY (Recipient_ID) REFERENCES Recipient(Recipient_ID),
     CONSTRAINT FK_Hospital_ID_2 FOREIGN KEY (Hospital_ID) REFERENCES Hospital(Hospital_ID),
     CONSTRAINT FK_Donated_Organ_ID_2 FOREIGN KEY (Donated_Organ_ID) REFERENCES Donated_Organ(Donated_Organ_ID),
     CONSTRAINT FK_Doctor_ID_1 FOREIGN KEY (Doctor_ID) REFERENCES Doctors(Doctor_ID),
