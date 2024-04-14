@@ -240,13 +240,13 @@ do.Donation_Date
 from Transplantation t
 
 left join Person p
-on p.Person_ID = t.Person_ID
+on p.Person_ID = t.Recipient_ID
 left join Donor do
-on do.Donor_ID = t.Person_ID
+on do.Donor_ID = p.Person_ID
 left join (select h.Hospital_ID, h.Hospital_Name, d.Doctor_Name from Hospital_Doctors hd 
             left join Hospital h on hd.Hospital_ID = h.Hospital_ID
             left join Doctors d on d.Doctor_ID = hd.Doctor_ID) a on a.Hospital_ID = t.Hospital_ID
-where @PersonID = t.Person_ID;
+where @PersonID = t.Recipient_ID;
 Print @Patient_Name;
 Print @DonationDate;
 Print @OrganDonated;
@@ -290,7 +290,7 @@ BEGIN
 
     SELECT @Recipient_ID = COUNT(*)
     FROM Transplantation T
-    WHERE T.Person_ID = @PersonID;
+    WHERE T.Recipient_ID = @PersonID;
 
     IF @Recipient_ID = 0
     BEGIN
@@ -299,7 +299,7 @@ BEGIN
     END
     SELECT 
         T.Transplantation_ID,
-        Recipient_Name = RP.First_Name + ' ' + RP.Last_Name,
+        Recipient_Name = P.First_Name + ' ' + P.Last_Name,
         T.Transplantation_Status,
         T.Transplantation_Date,
         OL.Organ_Name,
@@ -308,10 +308,9 @@ BEGIN
     FROM Transplantation T
     INNER JOIN Donated_Organ DO ON T.Donated_Organ_ID = DO.Donated_Organ_ID
     INNER JOIN Organ_List OL ON DO.Organ_ID = OL.Organ_ID
-    LEFT JOIN Recipient R ON R.Recipient_ID = T.Person_ID
-    LEFT JOIN Donor D ON D.Donor_ID = T.Person_ID
-    LEFT JOIN Person RP ON RP.Person_ID = R.Recipient_ID
-    LEFT JOIN Person DP ON DP.Person_ID = D.Donor_ID
+    LEFT JOIN Recipient R ON R.Recipient_ID = T.Recipient_ID
+    LEFT JOIN Person P ON P.Person_ID = R.Recipient_ID
+    LEFT JOIN Donor D ON D.Donor_ID = P.Person_ID
     LEFT JOIN (
         SELECT HD.Hospital_ID, H.Hospital_Name, D.Doctor_Name, D.Specialist 
         FROM Hospital_Doctors HD 
@@ -356,8 +355,8 @@ BEGIN
 
     SELECT 
         @Transplantation_ID = T.Transplantation_ID,
-        @Recipient_Name = RP.First_Name + ' ' + RP.Last_Name,
-        @Donor_Name = DP.First_Name + ' ' + DP.Last_Name,
+        @Recipient_Name = P.First_Name + ' ' + P.Last_Name,
+        @Donor_Name = P.First_Name + ' ' + P.Last_Name,
         @Transplantation_Status = T.Transplantation_Status,
         @Organ_name = OL.Organ_Name,
         @Doctor_name = HD.Doctor_Name,
@@ -365,10 +364,9 @@ BEGIN
     FROM Transplantation T
     INNER JOIN Donated_Organ DO ON T.Donated_Organ_ID = DO.Donated_Organ_ID
     INNER JOIN Organ_List OL ON DO.Organ_ID = OL.Organ_ID
-    LEFT JOIN Recipient R ON R.Recipient_ID = T.Person_ID
-    LEFT JOIN Donor D ON D.Donor_ID = T.Person_ID
-    LEFT JOIN Person RP ON RP.Person_ID = R.Recipient_ID
-    LEFT JOIN Person DP ON DP.Person_ID = D.Donor_ID
+    LEFT JOIN Recipient R ON R.Recipient_ID = T.Recipient_ID
+    LEFT JOIN Person P ON P.Person_ID = R.Recipient_ID
+    LEFT JOIN Donor D ON D.Donor_ID = P.Person_ID
     LEFT JOIN (
         SELECT HD.Hospital_ID, H.Hospital_Name, D.Doctor_Name, D.Specialist 
         FROM Hospital_Doctors HD 
@@ -415,7 +413,7 @@ SELECT
 FROM Person p
 LEFT JOIN Medical_Insurance mi ON p.Person_ID = mi.Person_ID
 LEFT JOIN Recipient r ON p.Person_ID = r.Recipient_ID
-LEFT JOIN Transplantation t ON p.Person_ID = t.Person_ID;
+LEFT JOIN Transplantation t ON p.Person_ID = t.Recipient_ID;
 
 --View 2
 CREATE VIEW HospitalDoctorsView AS
@@ -605,27 +603,10 @@ SET Encrypted_Contact_Number = ENCRYPTBYKEY(KEY_GUID('PhoneNumberEncryptionKey')
 CREATE NONCLUSTERED INDEX IX_Person_LastName_FirstName
 ON Person (Last_Name, First_Name);
 
--- Example query using the indexed columns
-SELECT *
-FROM Person
-WHERE Last_Name = 'Smith' AND First_Name = 'Harry';
-
 --Index to find Recipient waiting for specified organ within certain time
 CREATE NONCLUSTERED INDEX IX_Recipient_RequiredOrgan_DateRegistered
 ON Recipient (Required_Organ, Date_Registered);
 
--- Example query using the non-clustered index
-SELECT *
-FROM Recipient
-WHERE Required_Organ = 'Kidney'
-AND Date_Registered > '2023-01-01';
-
 --Index to retrieve doctors of particular specialization
 CREATE NONCLUSTERED INDEX IX_Doctors_Specialist
 ON Doctors (Specialist);
-
--- Example query using the non-clustered index
-SELECT *
-FROM Doctors
-WHERE Specialist = 'Cardiologist';
-
