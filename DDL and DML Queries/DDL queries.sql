@@ -208,13 +208,13 @@ CREATE TABLE Transplantation (
 ------------------------------Stored Procedure------------------------------
 
 --Procedure 1 
-CREATE PROCEDURE GetRecipientPatientDetails
+CREATE PROCEDURE GetRecipientPatientDetails2
     @PersonID INT,
     @Patient_Name VARCHAR(255) OUTPUT,
-    @DonationDate DATE OUTPUT,
-    @OrganDonated VARCHAR(255) OUTPUT,
+    @OOrgan_Received VARCHAR(255) OUTPUT,
     @Hospital_Name VARCHAR(255) OUTPUT, 
-    @Doctor_Name VARCHAR(255) OUTPUT
+    @Doctor_Name VARCHAR(255) OUTPUT,
+    @Transplantation_Date DATE OUTPUT
 AS
 BEGIN
     DECLARE @IsRecipient BIT = 0;
@@ -231,27 +231,30 @@ BEGIN
         RETURN;
     END
     
-select 
-CONCAT(p.first_name,' ', p.Last_Name) as Transplantation_Patient, 
-do.Organ_Donated, 
-a.Hospital_Name, 
-a.Doctor_Name, 
-do.Donation_Date 
-from Transplantation t
+	select top 1
+	CONCAT(p.first_name,' ', p.Last_Name) as Transplantation_Patient, 
+	r.Required_Organ as Organ_Received , 
+	a.Hospital_Name, 
+	a.Doctor_Name, 
+	t.Transplantation_Date
+	from Transplantation t
 
-left join Person p
-on p.Person_ID = t.Recipient_ID
-left join Donor do
-on do.Donor_ID = p.Person_ID
-left join (select h.Hospital_ID, h.Hospital_Name, d.Doctor_Name from Hospital_Doctors hd 
-            left join Hospital h on hd.Hospital_ID = h.Hospital_ID
-            left join Doctors d on d.Doctor_ID = hd.Doctor_ID) a on a.Hospital_ID = t.Hospital_ID
+	left join Recipient r
+	on r.Recipient_ID = t.Recipient_ID
+	left join Person p
+	on p.person_id = t.Recipient_ID
+	left join Donated_Organ do
+	on do.Person_ID = p.Person_ID
+	left join (select h.Hospital_ID, h.Hospital_Name, d.Doctor_Name from Hospital_Doctors hd 
+				left join Hospital h on hd.Hospital_ID = h.Hospital_ID
+				left join Doctors d on d.Doctor_ID = hd.Doctor_ID
+				) a on a.Hospital_ID = t.Hospital_ID
 where @PersonID = t.Recipient_ID;
 Print @Patient_Name;
-Print @DonationDate;
-Print @OrganDonated;
+Print @OOrgan_Received;
 Print @Hospital_Name; 
 Print @Doctor_Name ;
+Print @Transplantation_Date;
 end;
 
 --Procedure 2
@@ -297,7 +300,7 @@ BEGIN
         PRINT 'The person has not had a transplant';
         RETURN;
     END
-    SELECT 
+    SELECT top 1
         T.Transplantation_ID,
         Recipient_Name = P.First_Name + ' ' + P.Last_Name,
         T.Transplantation_Status,
@@ -319,14 +322,15 @@ BEGIN
     ) HD ON HD.Hospital_ID = T.Hospital_ID
     where r.Recipient_ID =@PersonID;
 
-    print @Transplantation_ID
-    print @PersonID
-    print @Recipient_Name
-    print @Transplantation_Status
-    print @Transplantation_Date
-    print @Organ_name
-    print @Doctor_name
-    print @Hospital
+	PRINT 'Transplantation ID: ' + CAST(@Transplantation_ID AS varchar(10))
+	PRINT 'Person ID: ' + CAST(@PersonID AS varchar(10))
+	PRINT 'Recipient Name: ' + @Recipient_Name
+	PRINT 'Transplantation Status: ' + @Transplantation_Status
+	PRINT 'Transplantation Date: ' + CAST(@Transplantation_Date AS varchar(10))
+	PRINT 'Organ Name: ' + @Organ_name
+	PRINT 'Doctor Name: ' + @Doctor_name
+	PRINT 'Hospital: ' + @Hospital
+
  END;
 
 --Procedure 4 
@@ -374,6 +378,14 @@ BEGIN
         LEFT JOIN Doctors D ON D.Doctor_ID = HD.Doctor_ID
     ) HD ON HD.Hospital_ID = T.Hospital_ID
     WHERE T.Transplantation_Date = @Transplantation_Date;
+	PRINT 'Transplantation ID: ' + CAST(@Transplantation_ID AS varchar(10)) 
+	PRINT 'Recipient Name: ' + @Recipient_Name 
+	PRINT 'Donor Name: ' + @Donor_Name 
+	PRINT 'Transplantation Status: ' + @Transplantation_Status 
+	PRINT 'Transplantation Date: ' + CAST(@Transplantation_Date AS varchar(10)) 
+	PRINT 'Organ Name: ' + @Organ_name 
+	PRINT 'Doctor Name: ' + @Doctor_Name 
+	PRINT 'Hospital: ' + @Hospital
 END;
 
 --Procedure 5
