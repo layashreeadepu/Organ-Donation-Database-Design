@@ -1,6 +1,4 @@
-# DMDD
-
-# Organ Donation System
+# Organ Donation Database System
 
 ## Overview
 
