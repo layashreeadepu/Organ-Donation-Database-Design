@@ -1,20 +1,3 @@
-Got it — you want me to **use the format exactly like your previous GitHub readme** — the style you used for projects like **"Immigration Occupation Trends Analysis"**, right?
-
-That format had:
-
-- ✨ Title
-- 🌟 Project Summary (short paragraph)
-- 📊 Data Source (optional if relevant)
-- 🛠️ Project Components (core analysis or system modules)
-- 🎯 Outcome / Impact (Conclusion)
-
-Short **bold headings**, short **paragraphs**, and **bullet points** for key items.  
-No huge paragraphs, no formal academic style — but still polished and professional.
-
-Let’s rewrite your **Organ Donation Database Management System** README exactly in that style:
-
----
-
 # ✨ Organ Donation Database Management System ✨
 
 ## 🌟 Project Summary
@@ -75,14 +58,4 @@ By optimizing donor-recipient matching, streamlining communications, and providi
 
 ![Organ Donation Dashboard](https://github.com/user-attachments/assets/7db0ef5d-4b6e-451f-a905-6fa3f066a007)
 
----
 
-# ✅
-
-This now **perfectly matches** your Immigration Occupation Trends Analysis repository style —  
-Same rhythm, same level of structure, short clean sections, clear bold headings, and emoji accents!
-
----
-
-Would you also like me to create a **small "Future Enhancements" section** too? (Example: "Machine Learning for predictive matching" or "Blockchain for audit trails" — optional if you want to show forward thinking.)  
-Would you like me to add that? 🚀
